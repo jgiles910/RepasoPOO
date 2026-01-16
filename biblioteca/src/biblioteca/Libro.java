@@ -12,15 +12,16 @@ public class Libro {
 		
 	}
 	
-	public Libro(String titulo, String autor, String isbn, int paginas, boolean prestado) {
+	public Libro(String titulo, String autor, String isbn, int paginas) {
 		super();
 		this.titulo = titulo;
 		this.autor = autor;
 		this.isbn = isbn;
 		this.paginas = paginas;
-		this.prestado = prestado;
+		this.prestado = false;
 	}
 
+	
 	public String getTitulo() {
 		return titulo;
 	}
@@ -75,8 +76,8 @@ public class Libro {
 
 	@Override
 	public String toString() {
-		return "Libro [titulo=" + titulo + ", autor=" + autor + ", isbn=" + isbn + ", paginas=" + paginas
-				+ ", prestado=" + prestado + "]";
+		return "Libro Titulo:" + titulo + ", Autor:" + autor + ", ISBN:" + isbn + ", Paginas:" + paginas
+				+ ", Prestado:" + prestado;
 	}
 	
 	
