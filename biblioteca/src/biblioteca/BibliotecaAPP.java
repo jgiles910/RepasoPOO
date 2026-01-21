@@ -1,15 +1,26 @@
 package biblioteca;
 
-import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class BibliotecaAPP {
 	
-	private static Scanner sc = new Scanner(System.in);
-
-	public static void main(String[] args) throws IOException {
+	static Scanner sc = new Scanner(System.in);
+	static String rutaLibrosDigitales = ("C:\\Users\\1AWA-9\\Documents\\RepasoPOOProgram\\librosDigitales.txt");
+	static String rutaLibrosLimitados = ("C:\\Users\\1AWA-9\\Documents\\RepasoPOOProgram\\librosEdicionLimitada.txt");
 	
+	String rutalibrosEdicionLimitada = ("C:\\Users\\1AWA-9\\Documents\\RepasoPOOProgram\\librosEdicionLimitada.txt");
+
+	public static void main(String[] args) throws Exception {
+	
+		
+		ArrayList<LibroDigital> listaDigital = new ArrayList<>();
+		ArrayList<LibroEdicionLimitada> listaLimitada = new ArrayList<LibroEdicionLimitada>();
+		
+		
 		ArrayList <Libro> libroLista = new ArrayList<>();
 		
 		Libro l1 = new Libro("El señor de los anillos", "Tolkien", "12sjnks", 300);
@@ -22,10 +33,10 @@ public class BibliotecaAPP {
 		libroLista.add(l3);
 		
 		
-		visualizarMenu(libroLista);
+		visualizarMenu(libroLista, listaDigital, listaLimitada);
 	}
 
-	private static void visualizarMenu(ArrayList<Libro> libroLista) {
+	private static void visualizarMenu(ArrayList<Libro> libroLista, ArrayList<LibroDigital> listaDigital, ArrayList<LibroEdicionLimitada> listaLimitada) throws Exception {
 		
 		int input;
 		
@@ -61,6 +72,14 @@ public class BibliotecaAPP {
 			case 4:
 				
 				break;
+			case 5:
+				listaDigital = cargarLibrosDigitales(rutaLibrosDigitales);
+				break;
+			case 6:
+				listaLimitada = cargarLibrosLimitados(rutaLibrosLimitados);
+				break;
+				
+			case 7: 
 				
 			default:
 				if (input > 13 || input < 0) {
@@ -69,6 +88,33 @@ public class BibliotecaAPP {
 			}
 		} while(input != 13);
 		
+		
+	}
+
+
+	private static ArrayList<LibroEdicionLimitada> cargarLibrosLimitados(String rutaLibrosLimitados) throws FileNotFoundException {
+		
+		File file = new File (rutaLibrosLimitados);
+		
+		Scanner scFile = new Scanner(file);
+		scFile.nextLine();
+		
+		while (scFile.hasNext()) {
+			
+			String[] campos = scFile.nextLine().split(":");
+			
+			
+		}
+		
+		return null;
+	}
+
+	private static void MostrarLibrosDigitales(ArrayList<LibroDigital> listaDigital) {
+		
+		for (int i = 0; i < listaDigital.size(); i++) {
+			
+			System.out.println(listaDigital.get(i).toString());
+		}
 		
 	}
 
@@ -134,5 +180,34 @@ public class BibliotecaAPP {
 				System.out.println("El numero de paginas debe de ser de al menos 50 pagina y no mas de 500.");
 			}
 		} else {System.out.println("El libro introducido no existe");}
+	}
+	
+	private static ArrayList<LibroDigital> cargarLibrosDigitales(String rutaLibrosDigitales) throws Exception{
+		
+		ArrayList<LibroDigital> listLibroDigi = new ArrayList<LibroDigital>();
+		
+		File file = new File(rutaLibrosDigitales);
+		
+		Scanner scFile = new Scanner(file);
+		
+		scFile.nextLine();
+		
+		while (scFile.hasNext()) {
+			
+			String[] campos = scFile.nextLine().split(":");
+			
+			LibroDigital l = new LibroDigital(campos[0], campos[1], campos[2], Integer.parseInt(campos[3]), Boolean.parseBoolean(campos[4]), campos[5]);
+			
+			listLibroDigi.add(l);
+			
+			
+		}
+		
+		scFile.close();
+		
+		return listLibroDigi;
+		
+		
+		
 	}
 }

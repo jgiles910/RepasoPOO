@@ -7,7 +7,12 @@ public class LibroDigital extends Libro {
 		
 	}
 	
-	public LibroDigital(String formato, String titulo, String autor, String isbn, int paginas) {
+	public LibroDigital(String titulo, String autor, String isbn, int paginas, boolean prestado, String formato) {
+		super(titulo, autor, isbn, paginas, prestado);
+		this.formato = formato;
+	}
+	
+	public LibroDigital( String titulo, String autor, String isbn, int paginas, String formato) {
 		super(titulo, autor, isbn, paginas);
 		this.formato = formato;
 	}
