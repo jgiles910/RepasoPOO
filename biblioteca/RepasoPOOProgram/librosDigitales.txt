@@ -1,0 +1,4 @@
+Titulo:Autor:ISBN:Paginas:Prestado:Formato
+Java para Principiantes:Juan Pérez:978-84-123-4567-1:350:false:PDF
+Inteligencia Artificial:Ana López:978-84-123-4567-2:480:true:ePub
+Diseño Web Moderno:Luis García:978-84-123-4567-3:220:false:MOBI
