@@ -27,7 +27,7 @@ public class LibroDigital extends Libro {
 	}
 
 	//metodo para cambiar el formato
-	private void cambiarFormato(String nuevoFormato) {
+	public void cambiarFormato(String nuevoFormato) {
 		
 		this.formato = nuevoFormato;
 		

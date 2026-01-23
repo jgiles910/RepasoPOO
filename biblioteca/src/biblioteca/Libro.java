@@ -8,17 +8,23 @@ public class Libro {
 	private int paginas;
 	private boolean prestado;
 	
+	Editorial editorial;
+	
 	public Libro() {
 		
 	}
 	
 	public Libro(String titulo, String autor, String isbn, int paginas, boolean prestado) {
 		super();
+		
 		this.titulo = titulo;
 		this.autor = autor;
 		this.isbn = isbn;
 		this.paginas = paginas;
 		this.prestado = prestado;
+		
+		
+		this.editorial = new Editorial("EDITORIAL1", "UK" , 2025,25);
 	}
 	
 	public Libro(String titulo, String autor, String isbn, int paginas) {
@@ -31,6 +37,14 @@ public class Libro {
 	}
 
 	
+	public Editorial getEditorial() {
+		return editorial;
+	}
+
+	public void setEditorial(Editorial edit) {
+		this.editorial = edit;
+	}
+
 	public String getTitulo() {
 		return titulo;
 	}

@@ -9,8 +9,8 @@ public final class LibroEdicionLimitada extends Libro {
 		
 	}
 
-	public LibroEdicionLimitada(String titulo, String autor, String isbn, int paginas, int numeroEdicion, int ejemplares) {
-		super(titulo, autor, isbn, paginas);
+	public LibroEdicionLimitada(String titulo, String autor, String isbn, int paginas,boolean prestado, int numeroEdicion, int ejemplares) {
+		super(titulo, autor, isbn, paginas, prestado);
 		this.numeroEdicion = numeroEdicion;
 		this.ejemplares = ejemplares;
 	}
@@ -29,7 +29,7 @@ public final class LibroEdicionLimitada extends Libro {
 	}
 
 	
-	private void cambiarNumeroEdicion(int nuevoNumero) {
+	public void cambiarNumeroEdicion(int nuevoNumero) {
 		
 		this.numeroEdicion = nuevoNumero;
 		
@@ -39,7 +39,7 @@ public final class LibroEdicionLimitada extends Libro {
 	@Override
 	public String toString() {
 		
-		return "Libro Edicion Limitada | Titulo: " + getTitulo() + ", Autor:" + getAutor() + ", ISBN:" + getIsbn() + ", Paginas:" + getPaginas() + ", Prestado:" + isPrestado() + " Ejemplares: " + ejemplares + "Numero de edicion: " + numeroEdicion;
+		return "Libro Edicion Limitada | Titulo: " + getTitulo() + ", Autor:" + getAutor() + ", ISBN:" + getIsbn() + ", Paginas:" + getPaginas() + ", Prestado:" + isPrestado() + " Ejemplares: " + ejemplares + " Numero de edicion: " + numeroEdicion;
 	}
 	
 	

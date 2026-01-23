@@ -2,17 +2,17 @@ package biblioteca;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 
 public class BibliotecaAPP {
 	
 	static Scanner sc = new Scanner(System.in);
-	static String rutaLibrosDigitales = ("C:\\Users\\1AWA-9\\Documents\\RepasoPOOProgram\\librosDigitales.txt");
-	static String rutaLibrosLimitados = ("C:\\Users\\1AWA-9\\Documents\\RepasoPOOProgram\\librosEdicionLimitada.txt");
-	
-	String rutalibrosEdicionLimitada = ("C:\\Users\\1AWA-9\\Documents\\RepasoPOOProgram\\librosEdicionLimitada.txt");
+	static String rutaLibrosDigitales = ("C:\\Users\\1AWA-9\\git\\repository5\\biblioteca\\RepasoPOOProgram\\librosDigitales.txt");
+	static String rutaLibrosLimitados = ("C:\\Users\\1AWA-9\\git\\repository5\\biblioteca\\RepasoPOOProgram\\librosEdicionLimitada.txt");
 
 	public static void main(String[] args) throws Exception {
 	
@@ -54,12 +54,12 @@ public class BibliotecaAPP {
 					+ "9. Cambiar formato libro digital\r\n"
 					+ "10. Cambiar número de edición libro de edición limitada\r\n"
 					+ "11. Sobrescribir fichero libros digitales\r\n"
-					+ "12. Sobrescribir libros digitales\r\n");
+					+ "12. Sobrescribir fichero libros de edición limitada\r\n");
+			
 			input = Integer.parseInt(sc.nextLine());
-					
+				
 			switch (input) {
 			case 1:
-				
 				anyadirLibro(libroLista);
 				break;
 			case 2:
@@ -70,29 +70,149 @@ public class BibliotecaAPP {
 				editarLibro(libroLista);
 				break;
 			case 4:
-				
 				break;
 			case 5:
 				listaDigital = cargarLibrosDigitales(rutaLibrosDigitales);
 				break;
-			case 6:
+			
+			case 6: 
+				mostrarLibrosDigitales(listaDigital);
+			case 7:
 				listaLimitada = cargarLibrosLimitados(rutaLibrosLimitados);
 				break;
+			case 8: 
+				mostrarLibrosLimitados(listaLimitada);
+				break;
 				
-			case 7: 
+			case 9: 
+				cambiarFormatoDigital(listaDigital);
+				break;
+				
+			case 10: 
+				cambiarNumeroEdicion(listaLimitada);
+				break;
+				
+			case 11:
+				sobrescribirFicheroDigital(listaDigital, rutaLibrosDigitales);
+				break;
+				
+			case 12:
+				sobrescribirFicheroLimitado(listaLimitada, rutaLibrosLimitados);
+				break;
 				
 			default:
-				if (input > 13 || input < 0) {
+				if (input > 13 || input < 1) {
 					System.out.println("Error");
 				} else {System.out.println("Has salido.");}
 			}
 		} while(input != 13);
+	}
+
+
+	private static void sobrescribirFicheroLimitado(ArrayList<LibroEdicionLimitada> listaLimitada,
+			String rutalimitados) throws FileNotFoundException {
+		File file = new File(rutalimitados);
+		
+		PrintWriter pw = new PrintWriter(file);
+		pw.println("Titulo:Autor:ISBN:Paginas:Prestado:NumeroEdicion:Ejemplares");
+		
+		for (LibroEdicionLimitada l : listaLimitada) {
+			
+			pw.println(l.getTitulo() + ":" + l.getAutor() + ":" + l.getIsbn() + ":" + l.getPaginas() + ":" + l.isPrestado() + ":" + l.getNumeroEdicion() + ":" + l.getEjemplares());
+		}
+	
+			pw.close();
+			
+			System.out.println("Libros de ediciones limitadas actualizado correctamente en el archivo: " + rutalimitados);
+	}
+
+	private static void sobrescribirFicheroDigital(ArrayList<LibroDigital> listaDigital, String rutaDigital) throws FileNotFoundException {
+		
+		File file = new File(rutaDigital);
+		
+		PrintWriter pw = new PrintWriter(file);
+		
+		pw.println("Titulo:Autor:ISBN:Paginas:Prestado:Formato");
+		for (LibroDigital l : listaDigital) {
+			pw.println(l.getTitulo() + ":" + l.getAutor() + ":" + l.getIsbn() + ":" + l.getPaginas() + ":" + l.isPrestado() + ":" + l.getFormato());
+		}
+		pw.close();
+		System.out.println("Libros de formatos digitales actualizado correctamente en el archivo: " + rutaDigital);
+	}
+
+	private static void cambiarNumeroEdicion(ArrayList<LibroEdicionLimitada> listaLimitada) {
+		
+		System.out.println("Dime el ISBN del libro al que quieres cambiar su numero de edicion");
+		String isbnBuscado = sc.nextLine();
+		boolean isbnExiste = false;
+	
+		for(LibroEdicionLimitada l : listaLimitada ) {
+			
+			if(l.getIsbn().equalsIgnoreCase(isbnBuscado)) {
+				isbnExiste = true;
+				
+				System.out.println("Libro con ISBN: " + isbnBuscado+ " ha sido encontrado\n");
+				
+				
+				System.out.println("Introduce el nuevo numero de edicion del libro: " + l.toString());
+				int nuevoNumero = Integer.parseInt(sc.nextLine());
+				
+				l.cambiarNumeroEdicion(nuevoNumero);
+				System.out.println("Numero de edicion del libro modificado correctamente");
+			}
+		}
+		
+		
+		if (!isbnExiste) {
+			System.out.println("El ISBN introducido no existe, prueba otra vez.");
+		}
 		
 		
 	}
 
+	
+	private static void cambiarFormatoDigital(ArrayList<LibroDigital> listaDigital) {
+		
+		System.out.println("Dime el ISBN del libro al que quieres cambiar su formato");
+		String isbnBuscado = sc.nextLine();
+		boolean isbnExiste = false;
+	
+		for(LibroDigital l : listaDigital ) {
+			
+			if(l.getIsbn().equalsIgnoreCase(isbnBuscado)) {
+				isbnExiste = true;
+				
+				System.out.println("Libro con ISBN: " + isbnBuscado+ " ha sido encontrado\n");
+				
+				
+				System.out.println("Introduce el nuevo formato del libro: " + l.toString());
+				String nuevoFormato = sc.nextLine();
+				
+				l.cambiarFormato(nuevoFormato);
+				System.out.println("Formato modificado correctamente");
+			}
+		}
+		
+		
+		if (!isbnExiste) {
+			System.out.println("El ISBN introducido no existe, prueba otra vez.");
+		}
+		
+	}
+
+	private static void mostrarLibrosLimitados(ArrayList<LibroEdicionLimitada> listaLimitada) {
+		
+		for (int i = 0; i < listaLimitada.size(); i++) {
+			
+			System.out.println(listaLimitada.get(i).toString());
+		}
+		
+	}
 
 	private static ArrayList<LibroEdicionLimitada> cargarLibrosLimitados(String rutaLibrosLimitados) throws FileNotFoundException {
+		
+		ArrayList<LibroEdicionLimitada> listaLimitada = new ArrayList<>();
+		
 		
 		File file = new File (rutaLibrosLimitados);
 		
@@ -101,15 +221,19 @@ public class BibliotecaAPP {
 		
 		while (scFile.hasNext()) {
 			
-			String[] campos = scFile.nextLine().split(":");
+			String[] valores = scFile.nextLine().split(":");
 			
+			LibroEdicionLimitada l = new LibroEdicionLimitada(valores[0], valores[1], valores[2],Integer.parseInt(valores[3]), Boolean.parseBoolean(valores[4]), Integer.parseInt(valores[5]), Integer.parseInt(valores[6]));
 			
+			listaLimitada.add(l);
 		}
+			scFile.close();
 		
-		return null;
+			System.out.println("Libros de edicion limitada cargados correctamente");
+		return listaLimitada;
 	}
 
-	private static void MostrarLibrosDigitales(ArrayList<LibroDigital> listaDigital) {
+	private static void mostrarLibrosDigitales(ArrayList<LibroDigital> listaDigital) {
 		
 		for (int i = 0; i < listaDigital.size(); i++) {
 			
@@ -203,6 +327,7 @@ public class BibliotecaAPP {
 			
 		}
 		
+		System.out.println("Los libros digitales se han cargado correctamente");
 		scFile.close();
 		
 		return listLibroDigi;
