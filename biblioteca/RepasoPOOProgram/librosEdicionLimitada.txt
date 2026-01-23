@@ -1,4 +1,4 @@
 Titulo:Autor:ISBN:Paginas:Prestado:NumeroEdicion:Ejemplares
 El Principito (Edición Coleccionista):Antoine de Saint-Exupéry:978-84-123-4568-1:96:false:5:12
-Moby's Dick (Edición Limitada):Herman Melville:978-84-123-4568-2:720:true:3:2
+Moby's Dick (Edición Limitada):Herman Melville:978-84-123-4568-2:720:true:67:2
 Hamlet (Edición de Lujo):William Shakespeare:978-84-123-4568-3:200:false:10:5
