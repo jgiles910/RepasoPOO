@@ -55,7 +55,7 @@ public class Editorial {
 	@Override
 	public String toString() {
 		return "Editorial - Nombre de la editorial: " + nombreEditorial + " Pais de origen: " + paisOrigen + " Año fundacion: "
-				+ anyoFundacion + " Cantidad de libros publicados: " + cantidadLibrosPublicados;
+				+ anyoFundacion + " Cantidad de libros publicados: " + cantidadLibrosPublicados + "\n";
 	}
 	
 	

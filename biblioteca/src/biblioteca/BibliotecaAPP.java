@@ -19,7 +19,7 @@ public class BibliotecaAPP {
 		
 		ArrayList<LibroDigital> listaDigital = new ArrayList<>();
 		ArrayList<LibroEdicionLimitada> listaLimitada = new ArrayList<LibroEdicionLimitada>();
-		
+		ArrayList<Editorial> listaEditorial = new ArrayList<Editorial>();
 		
 		ArrayList <Libro> libroLista = new ArrayList<>();
 		
@@ -33,10 +33,10 @@ public class BibliotecaAPP {
 		libroLista.add(l3);
 		
 		
-		visualizarMenu(libroLista, listaDigital, listaLimitada);
+		visualizarMenu(libroLista, listaDigital, listaLimitada, listaEditorial);
 	}
 
-	private static void visualizarMenu(ArrayList<Libro> libroLista, ArrayList<LibroDigital> listaDigital, ArrayList<LibroEdicionLimitada> listaLimitada) throws Exception {
+	private static void visualizarMenu(ArrayList<Libro> libroLista, ArrayList<LibroDigital> listaDigital, ArrayList<LibroEdicionLimitada> listaLimitada, ArrayList<Editorial> listaEditorial) throws Exception {
 		
 		int input;
 		
@@ -55,6 +55,8 @@ public class BibliotecaAPP {
 					+ "10. Cambiar número de edición libro de edición limitada\r\n"
 					+ "11. Sobrescribir fichero libros digitales\r\n"
 					+ "12. Sobrescribir fichero libros de edición limitada\r\n");
+			System.out.println("13. Crear Editoriales");
+			System.out.println("14. Visualizar Editoriales");
 			
 			input = Integer.parseInt(sc.nextLine());
 				
@@ -99,15 +101,44 @@ public class BibliotecaAPP {
 			case 12:
 				sobrescribirFicheroLimitado(listaLimitada, rutaLibrosLimitados);
 				break;
+			
+			case 13: 
+			 listaEditorial = crearEditoriales();
+				break;
+			
+			case 14: 
+				visualizarEditoriales(listaEditorial);
 				
 			default:
-				if (input > 13 || input < 1) {
+				if (input > 15 || input < 1) {
 					System.out.println("Error");
 				} else {System.out.println("Has salido.");}
 			}
-		} while(input != 13);
+		} while(input != 15);
 	}
 
+
+	private static void visualizarEditoriales(ArrayList<Editorial> listaEditorial) {
+		
+		for (Editorial editorial : listaEditorial) {
+			System.out.println(editorial.toString());
+		}
+	}
+
+	private static ArrayList<Editorial> crearEditoriales() {
+		
+		ArrayList<Editorial> listaEditorial = new ArrayList<>();
+		
+		Editorial e1 = new Editorial("Hodeia", "Pais Vasco", 1970, 40);
+		Editorial e2 = new Editorial("Le Baguette", "Francia", 1967, 30);
+		Editorial e3 = new Editorial("Grandmaster", "Inglaterra", 1894, 20);
+		
+		listaEditorial.add(e1);
+		listaEditorial.add(e2);
+		listaEditorial.add(e3);
+		
+		return listaEditorial;
+	}
 
 	private static void sobrescribirFicheroLimitado(ArrayList<LibroEdicionLimitada> listaLimitada,
 			String rutalimitados) throws FileNotFoundException {
@@ -126,7 +157,8 @@ public class BibliotecaAPP {
 			System.out.println("Libros de ediciones limitadas actualizado correctamente en el archivo: " + rutalimitados);
 	}
 
-	private static void sobrescribirFicheroDigital(ArrayList<LibroDigital> listaDigital, String rutaDigital) throws FileNotFoundException {
+	private static void sobrescribirFicheroDigital
+	(ArrayList<LibroDigital> listaDigital, String rutaDigital) throws FileNotFoundException {
 		
 		File file = new File(rutaDigital);
 		
@@ -140,7 +172,8 @@ public class BibliotecaAPP {
 		System.out.println("Libros de formatos digitales actualizado correctamente en el archivo: " + rutaDigital);
 	}
 
-	private static void cambiarNumeroEdicion(ArrayList<LibroEdicionLimitada> listaLimitada) {
+	private static void cambiarNumeroEdicion
+(ArrayList<LibroEdicionLimitada> listaLimitada) {
 		
 		System.out.println("Dime el ISBN del libro al que quieres cambiar su numero de edicion");
 		String isbnBuscado = sc.nextLine();
@@ -170,7 +203,6 @@ public class BibliotecaAPP {
 		
 	}
 
-	
 	private static void cambiarFormatoDigital(ArrayList<LibroDigital> listaDigital) {
 		
 		System.out.println("Dime el ISBN del libro al que quieres cambiar su formato");
@@ -271,7 +303,6 @@ public class BibliotecaAPP {
 		libroLista.add(libInroducido);
 	}
 	
-	//3.	La opción editar libro deberá permitir al usuario editar el número de páginas y el estado, validando que el número de páginas esté entre 50 y 500. 
 	public static void editarLibro(ArrayList<Libro> libroLista) {
 		
 		String buscarLibro;

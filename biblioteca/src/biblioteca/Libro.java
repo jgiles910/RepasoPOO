@@ -99,7 +99,7 @@ public class Libro {
 
 	@Override
 	public String toString() {
-		return "Libro Titulo:" + titulo + ", Autor:" + autor + ", ISBN:" + isbn + ", Paginas:" + paginas
+		return  editorial.toString() +  "Libro Titulo:" + titulo + ", Autor:" + autor + ", ISBN:" + isbn + ", Paginas:" + paginas
 				+ ", Prestado:" + prestado;
 	}
 	
